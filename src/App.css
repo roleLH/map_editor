@@ -28,11 +28,93 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+#chunkpanel {
+  border: 1px solid #cdcdcd;
+  padding: 5px;
 }
+
+#chunktitle {
+  margin: 3px;
+  border: 1px inset #cdcdcd;
+  border-radius: 3px;
+  background-color: #f9f9fb;
+  padding: 3px;
+}
+
+#chunktitle:hover {
+  border: 1px solid #000000;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 2px rgba(0, 144, 237, 0.4);
+}
+
+#chunktitle.select {
+  margin: 3px;
+  border: 2px solid #000000;
+  border-radius: 3px;
+  box-shadow:#61dafb
+}
+
+#chunktitleeye {
+  border: 0px inset;
+}
+#chunkedit {
+  text-align: center
+}
+
+#instructionlist {
+  margin: 3px;
+  border: 1px inset #cdcdcd;
+
+  background-color: #f9f9fb;
+  padding: 3px;
+
+  height: 100%;
+}
+
+#instructionlist div#list {
+  margin: 3px;
+  border: 1px inset #cdcdcd;
+
+  background-color: #f9f9fb;
+  padding: 3px;
+
+  height: 190px;
+  overflow-y: auto;
+}
+
+#instructionpanel {
+  margin: 3px;
+  border: 1px inset #cdcdcd;
+
+  background-color: #f9f9fb;
+  padding: 3px;
+
+  height: 100%;
+}
+
+#instruction:hover {
+  cursor: pointer;
+}
+#instruction.select {
+  background-color: #3a6aa8;
+  color: #cdcdcd;
+}
+
+#originedit {
+
+  border: 0px inset #cdcdcd;
+  background-color: #f9f9fb
+}
+
+
+#chunkinfo {
+  margin: 3px;
+  border: 1px solid #cdcdcd;
+
+  background-color: #f9f9fb;
+  padding: 5px;
+
+  height: 100%;
+}
+

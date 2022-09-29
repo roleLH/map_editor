@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { Col, Row } from "antd"; 
+import "antd/dist/antd.css"
+
+import ChunkPanel from './mapeditor/ui/ChunkPanel';
+import Canvas from './mapeditor/ui/Canvas';
+import ToolContainer from './mapeditor/ui/ToolContainer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Row>
+          <Col>
+            <ToolContainer></ToolContainer>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={18}>
+            <Canvas></Canvas>
+          </Col>
+          <Col span={6}>
+            <ChunkPanel></ChunkPanel>
+          </Col>
+        </Row>
     </div>
   );
 }
