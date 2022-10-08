@@ -147,7 +147,18 @@ class SelectionBox extends Shape {
 const SHAPES = {
   Line: Line,
   Ellipse: Ellipse,
+  LinePath: Path,
   Path: Path,
   Point: Point,
   SelectionBox: SelectionBox,
 }
+
+let id = 0;
+function createShape(shapeName, ...args) {
+  let shape = new SHAPES[shapeName](...args);
+  shape.id = id;
+  id++;
+  return shape;
+}
+
+export default createShape;

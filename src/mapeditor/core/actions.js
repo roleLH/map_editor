@@ -42,6 +42,21 @@ class MoveAction {
 
 class AddShapeAction {
   constructor(core, shape, preShapeId) {
-    
+    this.core = core;
+    this.shape = shape;
+    this.preShapeId = preShapeId;
   }
+
+  do() {
+    this.core.shapes.push(this.shape);
+  }
+  undo() {
+    this.core.shapes.pop();
+  }
+}
+
+export default {
+  ClearAction,
+  MoveAction,
+  AddShapeAction,
 }

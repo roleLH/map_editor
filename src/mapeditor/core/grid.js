@@ -10,13 +10,15 @@ import Cell from "./cell";
   }
 
 
-  clearCells() {
+  clearCells(c) {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        this.cells[i][j].color = 0;
+        this.cells[i][j].color = c;
       }
     }
   }
+
+  
 
   clicked(cell) {
     cell.clicked();
@@ -61,7 +63,8 @@ import Cell from "./cell";
     if(!cell) {
       return;
     }
-    cell.setColor(c);
+    let _c = `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
+    cell.setColor(_c);
   }
 
   line(x1, y1, x2, y2, c) {

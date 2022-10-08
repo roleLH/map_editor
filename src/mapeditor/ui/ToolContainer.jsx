@@ -4,10 +4,12 @@ import { Button, Input, Col, Row, Card, Popover, Switch, Divider, InputNumber } 
 import {
   EyeOutlined,
   EyeInvisibleOutlined,
-  SettingOutlined
+  SettingOutlined,
+  DragOutlined
 } from '@ant-design/icons';
 import "./tools.css"
-
+import PaletteSelector from "./Palette";
+import GCore from "../core/core";
 
 function tool(c) {
   return <div id = "tool">
@@ -50,6 +52,34 @@ class RectTool extends Tool {
   }
 }
 
+class OvalTool extends Tool {
+  constructor(props) {
+    super(props);
+    this.name = "Oval";
+  }
+}
+
+class UndoRedoTool extends Tool {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <Row>
+        <Col span={12}><div id = "tool"
+          onClick={() => {
+            GCore.actionStk.undo();
+          }}
+        >Undo</div></Col>
+        <Col span={12}><div id = "tool"
+          onClick={() => {
+            GCore.actionStk.redo();
+          }}
+        >Redo</div></Col>
+      </Row>
+  }
+}
+
 class ToolContainer extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +92,7 @@ class ToolContainer extends Component {
     this.tmpPos = [0, 0];
     this.ref = createRef();
 
-    this.init = false;
+    this.init = true;
   }
 
   componentDidMount() {
@@ -102,12 +132,23 @@ class ToolContainer extends Component {
   render() {
     return <div id = "toolcontainer" style={
       { position: "relative"}}>
-      <div id="toolcontainer_title" ref={this.ref}>Tools</div>
+        <Row>
+          <Col>
+            <div id="toolcontainer_title" >Tools</div>
+          </Col>
+          <Col>
+            <Button icon = {<DragOutlined />}></Button>
+          </Col>
+        </Row>
+      
       <hr/>
       <div id="toollist">
+        <PaletteSelector></PaletteSelector>
         <CellTool/>
         <LineTool/>
         <RectTool/>
+        <OvalTool/>
+        <UndoRedoTool/>
       </div>
     </div>
   }

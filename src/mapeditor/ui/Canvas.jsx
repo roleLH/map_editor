@@ -21,7 +21,9 @@ class Canvas extends Component {
   }
 
   render() {
-    return <canvas ref={this.elref}></canvas>
+    return <div id="canvas_container">
+      <canvas ref={this.elref}></canvas>
+    </div>
   }
 }
 

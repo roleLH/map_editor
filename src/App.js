@@ -6,6 +6,7 @@ import "antd/dist/antd.css"
 import ChunkPanel from './mapeditor/ui/ChunkPanel';
 import Canvas from './mapeditor/ui/Canvas';
 import ToolContainer from './mapeditor/ui/ToolContainer';
+import PaletteSelector from './mapeditor/ui/Palette';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             <Canvas></Canvas>
           </Col>
           <Col span={6}>
-            <ChunkPanel></ChunkPanel>
+            {/* <ChunkPanel></ChunkPanel> */}
           </Col>
         </Row>
     </div>

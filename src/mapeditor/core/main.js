@@ -2,9 +2,21 @@ import Grid from "./grid"
 import Canvas from "./canvas"
 import Player from "./player"
 import Controller from "./controller";
+import events from "./events";
+import GCore from "./core";
 
 
   class App {
+
+    clientCoordsToGridCoords(x, y) {
+      // event.offsetX, event.offsetY
+      let cellSize = 20;
+      let borderWidth = 1; 
+      let cellX = Math.floor(x / (cellSize + borderWidth));
+      let cellY = Math.floor(y / (cellSize + borderWidth));
+      return [cellX, cellY];
+    }
+
   constructor(el) {
     this.el = el;
 
@@ -18,8 +30,8 @@ import Controller from "./controller";
       background: 'rgba(255, 255, 255, 1)'
     });
 
-    this.grid = new Grid(Math.floor(this.el.width / (cellSize + 1)), Math.floor(this.el.height / (cellSize + 1)));
-
+    // this.grid = new Grid(Math.floor(this.el.width / (cellSize + 1)), Math.floor(this.el.height / (cellSize + 1)));
+    this.grid = GCore.mainGrid;
 
     // place a player randomly
     this.player = new Player(null, this.grid);
@@ -34,10 +46,29 @@ import Controller from "./controller";
 
     // set event handlers
     this.el.addEventListener('click', function (event) {
-      _this.rightClicked(event);
+      event.preventDefault();
+      // _this.rightClicked(event);
     });
 
+  
+    this.el.addEventListener("mousedown", (e) => {
+      let [x, y] = this.clientCoordsToGridCoords(e.offsetX, e.offsetY);
+      GCore.pointerDown(x, y);
+      console.log("down");
+    })
+    this.el.addEventListener("mousemove", (e) => {
+      let [x, y] = this.clientCoordsToGridCoords(e.offsetX, e.offsetY);
+      GCore.pointerMove(x, y);
+    })
+    this.el.addEventListener("mouseup", (e) => {
+      let [x, y] = this.clientCoordsToGridCoords(e.offsetX, e.offsetY);
+      GCore.pointerUp(x, y);
+      console.log("up");
+    })
+
+
     this.el.addEventListener('contextmenu', function (event) {
+      event.preventDefault();
       
     });
 
@@ -82,15 +113,24 @@ import Controller from "./controller";
       this.run();
     };
 
-    let angle = 0;
+    let last_tick = Date.now();
     this.run = function () {
       requestAnimationFrame(function () {
-        _this.player.tick();
-        _this.canvas.drawGrid(_this.grid);
-        _this.canvas.draw(_this.grid.getCells());
-        _this.canvas.paintRotateCell(angle);
+        // _this.player.tick();
+        if(Date.now() - last_tick < 333) {
+          return _this.run();
+        }
+        last_tick = Date.now();
+
+        _this.canvas.clear();
+        _this.canvas.drawGrid(GCore.mainGrid);
+        // _this.canvas.draw(_this.grid.getCells());
+        GCore.mainClear();
+        GCore.renderShapes();
+        GCore.renderTo(_this.canvas);
+        // _this.canvas.paintRotateCell(angle);
         _this.canvas.drawToEle();
-        angle++;
+        
         _this.run();
       });
     };
@@ -103,5 +143,7 @@ import Controller from "./controller";
 //   app.init();
 
 // }
+let node = document.getElementById("root");
+events.onkeydown(node);
 
 export default App;

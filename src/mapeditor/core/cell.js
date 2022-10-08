@@ -5,7 +5,7 @@
     this.y = y;
     this.dirty = false;
     this.obstacle = false;
-    this.color = 0;
+    this.color = "rgba(255,255,255,1)";
   }
   equals(cell) {
     return (this.x === cell.x && this.y === cell.y);
@@ -43,7 +43,10 @@
     return { x: this.x, y: this.y };
   }
 
-  setColor(c) {this.color = c; }
+  setColor(c) {
+    this.color = c; 
+    this.setDirty();
+  }
 }
 
 
