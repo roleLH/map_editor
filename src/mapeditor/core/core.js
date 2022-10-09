@@ -70,18 +70,19 @@ class Core {
   renderShapes() {
     this.shapes.forEach((shape) => {
       shape.drawTo(this.mainGrid);
-      console.log(this.shapes.length);
     })
     
   }
   renderTo(canvas) {
-    canvas.draw(this.mainGrid.getCells());
+    // canvas.draw(this.mainGrid.getCells());
     if(this.needRenderBuffer) {
+      console.log(this.bufferGrid.getCells());
       canvas.draw(this.bufferGrid.getCells());
+      // this.bufferClear();
     }
   }
   bufferClear() {
-    this.bufferGrid.clearCells("rgba(255, 255, 255, 0)");
+    this.bufferGrid.clearCells("rgba(255, 255, 255, 1)");
   }
   mainClear() {
     this.mainGrid.clearCells("rgba(255, 255, 255, 1)");
@@ -144,7 +145,10 @@ class Core {
    * @param {String} name 
    */
   setToolBy(name) {
-
+    let tool = tools[name];
+    if(tool) {
+      this.setTool(tool);
+    }
   }
 
 

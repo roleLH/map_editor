@@ -26,7 +26,11 @@ class Tool extends Component {
 
   render() {
     return tool(
-      <div>{this.name}</div>
+      <div onClick={() => {
+        if(this.name == "Cell" || this.name == "Rect") {
+          GCore.setToolBy(this.name);
+        }
+      }}>{this.name}</div>
     );
   }
 }

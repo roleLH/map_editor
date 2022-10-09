@@ -18,7 +18,6 @@ import Cell from "./cell";
     }
   }
 
-  
 
   clicked(cell) {
     cell.clicked();

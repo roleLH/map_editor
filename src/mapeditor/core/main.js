@@ -66,10 +66,13 @@ import GCore from "./core";
       console.log("up");
     })
 
-
+    this.el.addEventListener('click', function (event) {
+      event.preventDefault();
+      console.log(333);
+    });
     this.el.addEventListener('contextmenu', function (event) {
       event.preventDefault();
-      
+      console.log(222);
     });
 
     document.addEventListener('keydown', function (event) {
@@ -117,7 +120,7 @@ import GCore from "./core";
     this.run = function () {
       requestAnimationFrame(function () {
         // _this.player.tick();
-        if(Date.now() - last_tick < 333) {
+        if(Date.now() - last_tick < 33) {
           return _this.run();
         }
         last_tick = Date.now();

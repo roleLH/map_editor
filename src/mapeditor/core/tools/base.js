@@ -58,8 +58,33 @@ class Cell extends Tool {
   }
 }
 
+class Rectangle extends Tool {
+  constructor() {
+    super();
+    this.name = "Rect";
+    this.fill = false;
+  }
+
+  begin(x, y, core) {
+    core.needRenderBuffer = true;
+    let c = core.getColor();
+    this.currentShape = createShape("Rectangle", x, y, 1, 1, [c[0], c[1], c[2]], this.fill);
+  }
+  continue(x, y, core) {
+    this.currentShape.width = x - this.currentShape.x;
+    this.currentShape.height = y - this.currentShape.y;
+    core.drawShapeToBuffer(this.currentShape);
+  }
+
+  end(x, y, core) {
+    core.saveShape(this.currentShape);
+    this.currentShape = null;
+    core.needRenderBuffer = false;
+  }
+}
+
 
 export default {
   Cell: new Cell(),
-
+  Rect: new Rectangle(),
 }

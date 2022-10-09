@@ -151,6 +151,7 @@ const SHAPES = {
   Path: Path,
   Point: Point,
   SelectionBox: SelectionBox,
+  Rectangle: Rectangle,
 }
 
 let id = 0;
