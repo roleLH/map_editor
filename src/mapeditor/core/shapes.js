@@ -21,10 +21,22 @@ class Rectangle extends Shape {
   }
 
   drawTo(grid) {
-    if(this.fill) {
-      return grid.rectFill(this.x, this.y, this.width, this.height, this.color);
+    let x = this.x;
+    let y = this.y;
+    let w = this.width;
+    let h = this.height;
+    if(this.width < 0) {
+      x += this.width;
+      w = -this.width;
     }
-    return grid.rect(this.x, this.y, this.width, this.height, this.color);
+    if(this.height < 0) {
+      y += this.height;
+      h = -this.height;
+    }
+    if(this.fill) {
+      return grid.rectFill(x, y, w, h, this.color);
+    }
+    return grid.rect(x, y, w, h, this.color);
   }
 
   move(info) {
@@ -134,6 +146,13 @@ class Point extends Shape {
   setUpperLeft(info) {
     this.x = info.x;
     this.y = info.y;
+  }
+}
+
+class FillShape extends Shape {
+  constructor(x, y, c) {
+    super("fillshape");
+    this.points = [];
   }
 }
 
